@@ -39,6 +39,7 @@ function GameController ($scope) {
   // GAME FUNCTIONALITY
   function togglePiece (row, col) {
     console.log(row, col);
+    $scope.board[row][col] = $currentPiece;
   }
 
   $scope.togglePiece = togglePiece;
