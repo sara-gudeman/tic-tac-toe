@@ -35,5 +35,12 @@ function GameController ($scope) {
   var board = makeBoard(3);
 
   $scope.board = board;
+
+  // GAME FUNCTIONALITY
+  function togglePiece (row, col) {
+    console.log(row, col);
+  }
+
+  $scope.togglePiece = togglePiece;
   
 }
