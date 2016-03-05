@@ -16,10 +16,8 @@
 
     <article class="game" ng-controller="GameController">
       <div class="gameboard">
-        <div class="row">
-          <button>X</button>
-          <button>X</button>
-          <button>X</button>
+        <div ng-repeat="row in board" class="row">
+          <button ng-repeat="col in row track by $index">X</button>
         </div>
       </div>
       <p>{{hello}}!</p>
