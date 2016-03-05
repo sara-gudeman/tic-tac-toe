@@ -16,11 +16,12 @@
 
     <article class="game" ng-controller="GameController">
       <div class="gameboard">
+        Current Player: {{currentPlayer.name}}
+        Player Piece: {{currentPlayer.gamePiece}}
         <div ng-repeat="row in board" class="row">
-          <button ng-repeat="col in row track by $index">X</button>
+          <button ng-repeat="col in row track by $index"></button>
         </div>
       </div>
-      <p>{{hello}}!</p>
     </article>
     
     <footer>

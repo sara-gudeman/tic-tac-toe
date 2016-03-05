@@ -5,8 +5,22 @@ angular
 GameController.$inject = ['$scope'];
 
 function GameController ($scope) {
-  $scope.hello = 'hello';
 
+  // PLAYER FUNCTIONALITY
+  $scope.players = [{
+      name: 'Player1',
+      gamePiece: 'O'
+    },
+    {
+      name: 'Player2',
+      gamePiece: 'X'
+    }
+  ];
+
+  $scope.currentPlayer = $scope.players[0];
+  $currentPiece = $scope.currentPlayer.gamePiece;
+
+  // BOARD FUNCTIONALITY
   function makeBoard (n) {
     var board = [];
 
