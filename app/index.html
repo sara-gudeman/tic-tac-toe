@@ -8,18 +8,29 @@
     <link rel="stylesheet" src="node_modules/normalize.css/normalize.css" />
 
   </head>
-  <body ng-app="app">
+  <body ng-app="game">
 
     <header>
       <h1>Play Tic-Tac-Toe</h1>
     </header>
 
-    <article></article>
+    <article class="game" ng-controller="GameController">
+      <div class="gameboard">
+        <div class="row">
+          <button>X</button>
+          <button>X</button>
+          <button>X</button>
+        </div>
+      </div>
+      <p>{{hello}}!</p>
+    </article>
     
     <footer>
       <p>Made with &#9829; in San Francisco</p>
     </footer>
 
     <script src="node_modules/angular/angular.min.js"></script>
+    <script src="app/game.controller.js"></script>
+    <script src="app/game.module.js"></script>
   </body>
 </html>
