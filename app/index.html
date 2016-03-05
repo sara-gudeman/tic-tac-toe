@@ -19,7 +19,7 @@
         Current Player: {{currentPlayer.name}}
         Player Piece: {{currentPlayer.gamePiece}}
         <div class="row" ng-repeat="row in board" ng-init="parentIndex = $index">
-          <button ng-repeat="col in row track by $index" ng-click="togglePiece(parentIndex, $index)">{{board[parentIndex][$index]}}</button>
+          <button ng-repeat="col in row track by $index" ng-click="updateGame(parentIndex, $index, playerId)">{{board[parentIndex][$index]}}</button>
         </div>
       </div>
     </article>
