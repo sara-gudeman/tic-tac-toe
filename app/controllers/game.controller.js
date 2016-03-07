@@ -6,7 +6,7 @@ GameController.$inject = ['$scope', 'boardService'];
 
 function GameController ($scope, boardService) {
   var size = 3;
-  
+
   $scope.board = boardService.makeBoard(size);
 
   // PLAYER FUNCTIONALITY
@@ -39,8 +39,11 @@ function GameController ($scope, boardService) {
 
   // GAME PIECE FUNCTIONALITY
   function togglePiece (row, col) {
+    if (!$scope.board[row][col].disabled) {
+      $scope.board[row][col].value = $scope.currentPiece;
+      $scope.board[row][col].disabled = true;
+    }
     console.log(row, col, $scope.currentPiece);
-    $scope.board[row][col] = $scope.currentPiece;
   }
 
   $scope.togglePiece = togglePiece;
@@ -55,5 +58,21 @@ function GameController ($scope, boardService) {
   }
 
   $scope.updateGame = updateGame;
-  
+
+  function checkWin (board) {
+    // two ways to end game:
+    // 1. tie -- full board?
+    // 2. one player makes three in a row
+  }
+
+  function restartGame () {
+    // reset board to initial state
+    // basically just make a new board?
+  }
+
+  function endGame () {
+    // disable all pieces,
+    // show game outcome
+  }
+
 }
