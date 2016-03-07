@@ -20,9 +20,7 @@
         Current Player: {{currentPlayer.name}}
         Player Piece: {{currentPlayer.gamePiece}}
         <div class="row" ng-repeat="row in board" ng-init="parentIndex = $index">
-          <button class="col board-square" ng-repeat="col in row track by $index" ng-disabled="board[parentIndex][$index].disabled" ng-click="updateGame(parentIndex, $index, playerId)">
-            {{board[parentIndex][$index].value}}
-          </button>
+          <button class="col board-square" ng-class="board[parentIndex][$index].value" ng-repeat="col in row track by $index" ng-disabled="board[parentIndex][$index].disabled" ng-click="updateGame(parentIndex, $index, playerId)"></button>
         </div>
       </div>
     </article>

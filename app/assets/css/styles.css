@@ -20,3 +20,13 @@
 .col:nth-child(1), .col:nth-child(2) {
   border-right: 10px solid black;
 }
+
+.X {
+  background: url(../icons/x.svg) center no-repeat;
+  background-size: contain;
+}
+
+.O {
+  background: url(../icons/o.svg) center no-repeat;
+  background-size: contain;
+}
