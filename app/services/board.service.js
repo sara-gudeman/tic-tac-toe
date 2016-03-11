@@ -28,5 +28,17 @@ function boardService () {
     return board;
   }
 
+  service.getBoardState = function (board) {
+    var boardValues = [];
+    for (var i = 0; i < board.length; i++) {
+      var rowValues = [];
+      for (var j = 0; j < board.length; j++) {
+        rowValues.push(board[i][j].value);
+      }
+      boardValues.push(rowValues);
+    }
+    return boardValues;
+  }
+
   return service;
 }
