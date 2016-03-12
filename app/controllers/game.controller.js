@@ -2,9 +2,9 @@ angular
     .module('game')
     .controller('GameController', GameController);
 
-GameController.$inject = ['$scope', 'boardService', 'gameLogic', 'gamePiece'];
+GameController.$inject = ['$scope', 'boardService', 'gameLogic', 'gamePiece', 'gamePlayer'];
 
-function GameController ($scope, boardService, gameLogic, gamePiece) {
+function GameController ($scope, boardService, gameLogic, gamePiece, gamePlayer) {
   var size = 3;
 
   $scope.board = boardService.makeBoard(size);
@@ -12,69 +12,56 @@ function GameController ($scope, boardService, gameLogic, gamePiece) {
 
   // PLAYER FUNCTIONALITY
   $scope.players = [{
-      name: 'Player1',
+      name: 'Player 1',
       gamePiece: 'O'
     },
     {
-      name: 'Player2',
+      name: 'Player 2',
       gamePiece: 'X'
     }
   ];
 
+  // later this can be developed such that multiple independent games can be played at once
+  // this function currently only allows for two players
+  var changePlayers = gamePlayer.changePlayers.bind(null, $scope.players);
+  var getPlayer = gamePlayer.getPlayer.bind(null, $scope.players);
+
   $scope.playerId = 0;
-
-  $scope.currentPlayer = $scope.players[$scope.playerId];
-  $scope.currentPiece = $scope.currentPlayer.gamePiece;
-
-  // later this can be developed such that multiple independent games can be played at once
-  // this function currently only allows for two players
-  function changePlayers (players, playerId) {
-    var updateId = playerId === 0 ? 1 : 0;
-    return updateId;
-  }
-
-  // later this can be developed such that multiple independent games can be played at once
-  // this function currently only allows for two players
-  $scope.changePlayers = changePlayers.bind(null, $scope.players);
-
+  $scope.currentPlayer = getPlayer($scope.playerId);
   $scope.updateGame = updateGame;
+  $scope.isHidden = true;
 
   // GAME LOGIC FUNCTIONALITY
   // TODO: REMOVE $SCOPE REFERENCES SO THAT THIS CAN BE PULLED OUT INTO SERVICE
   function updateGame (row, col, playerId) {
+    var currentPlayer = getPlayer(playerId);
+    var currentPiece = currentPlayer.gamePiece;
+
     var selectedPiece = $scope.board[row][col];
-    gamePiece.togglePiece(selectedPiece, $scope.currentPiece);
+    gamePiece.togglePiece(selectedPiece, currentPlayer.gamePiece);
 
-    var board = boardService.getBoardState($scope.board);
-    gameLogic.checkWin(board, row, col, $scope.currentPiece);
+    var updatedBoard = boardService.getBoardState($scope.board);
 
-    // TEMP: JUST LOGGING THE WINNER
-    if (gameLogic.checkWin(board, row, col, $scope.currentPiece)) {
-      console.log($scope.players[playerId].name, ' wins')
-      $scope.outcome = $scope.players[playerId].name;
+    if (gameLogic.checkWin(updatedBoard, row, col, currentPlayer.gamePiece)) {
+      $scope.outcome = 'Winner: ' + currentPlayer.name;
+      $scope.isHidden = false;
       boardService.disableBoard($scope.board);
     }
-    // TEMP: JUST LOGGING THE TIE
-    if (gameLogic.checkWin(board, row, col, $scope.currentPiece) && gameLogic.checkTie(board)) {
-      console.log('tie')
+
+    if (gameLogic.checkTie(updatedBoard)) {
+      $scope.outcome = 'Tie';
+      $scope.isHidden = false;
+      boardService.disableBoard($scope.board);
     }
 
-    $scope.playerId = $scope.changePlayers(playerId);
-    $scope.currentPlayer = $scope.players[$scope.playerId];
-    $scope.currentPiece = $scope.currentPlayer.gamePiece;
+    $scope.playerId = changePlayers(playerId);
+    $scope.currentPlayer = getPlayer(playerId);
   }
 
   function restartGame () {
     $scope.board = boardService.makeBoard(size);
+    $scope.isHidden = true;
     $scope.outcome = null;
   }
-
-  function endGame () {
-    // disable all pieces,
-    // show game outcome
-  }
-
-  // GAME VISUAL FUNCTIONALITY
-  function getPieceSrc (piece) {}
 
 }
