@@ -4,13 +4,7 @@ angular
 
 function gameLogic () {
   var service = {};
-
-  // function checkWin (board) {
-    // two ways to end game:
-    // 1. tie -- full board?
-    // 2. one player makes three in a row
-  // }
-
+  
   service.checkWin = function (board, row, col, piece) {
     var n = board.length;
 
