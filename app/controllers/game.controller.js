@@ -2,12 +2,13 @@ angular
     .module('game')
     .controller('GameController', GameController);
 
-GameController.$inject = ['$scope', 'boardService', 'gameLogic'];
+GameController.$inject = ['$scope', 'boardService', 'gameLogic', 'gamePiece'];
 
-function GameController ($scope, boardService, gameLogic) {
+function GameController ($scope, boardService, gameLogic, gamePiece) {
   var size = 3;
 
   $scope.board = boardService.makeBoard(size);
+  $scope.outcome = null;
 
   // PLAYER FUNCTIONALITY
   $scope.players = [{
@@ -36,25 +37,14 @@ function GameController ($scope, boardService, gameLogic) {
   // this function currently only allows for two players
   $scope.changePlayers = changePlayers.bind(null, $scope.players);
 
-  // GAME PIECE FUNCTIONALITY
-  function togglePiece (row, col) {
-    if (!$scope.board[row][col].disabled) {
-      $scope.board[row][col].value = $scope.currentPiece;
-      $scope.board[row][col].disabled = true;
-    }
-    console.log(row, col, $scope.currentPiece);
-  }
-
-  $scope.togglePiece = togglePiece;
-
   $scope.updateGame = updateGame;
-
-  $scope.checkWin = gameLogic.checkWin;
 
   // GAME LOGIC FUNCTIONALITY
   // TODO: REMOVE $SCOPE REFERENCES SO THAT THIS CAN BE PULLED OUT INTO SERVICE
   function updateGame (row, col, playerId) {
-    $scope.togglePiece(row, col);
+    var selectedPiece = $scope.board[row][col];
+    gamePiece.togglePiece(selectedPiece, $scope.currentPiece);
+
     var board = boardService.getBoardState($scope.board);
     gameLogic.checkWin(board, row, col, $scope.currentPiece);
 
@@ -68,7 +58,7 @@ function GameController ($scope, boardService, gameLogic) {
     if (gameLogic.checkWin(board, row, col, $scope.currentPiece) && gameLogic.checkTie(board)) {
       console.log('tie')
     }
-    
+
     $scope.playerId = $scope.changePlayers(playerId);
     $scope.currentPlayer = $scope.players[$scope.playerId];
     $scope.currentPiece = $scope.currentPlayer.gamePiece;
