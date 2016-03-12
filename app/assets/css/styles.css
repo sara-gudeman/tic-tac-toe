@@ -1,7 +1,28 @@
+body {
+  background-color: #F7F7F7;
+}
+
+.header {
+  padding: 10px 0;
+  color: #404040;
+}
+
+.container {
+  flex: 1 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.players {
+  padding: 20px 0;
+  height: 50px;
+}
+
 .board-square {
   height: 100px;
   width: 100px;
-  background: white;
+  background: #FFFFFF;
   border: none;
 }
 
@@ -12,21 +33,49 @@
   flex-direction: row;
 }
 
+.shadow {
+  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.2);
+}
+
 /*TODO: MAKE STYLING WORK FOR GRIDS OF ALL SIZES*/
 .row:nth-child(1), .row:nth-child(2) {
-  border-bottom: 10px solid black;
+  border-bottom: 10px solid #666666;
 }
 
 .col:nth-child(1), .col:nth-child(2) {
-  border-right: 10px solid black;
+  border-right: 10px solid #666666;
 }
 
 .X {
   background: url(../icons/x.svg) center no-repeat;
   background-size: contain;
+  background-color: #FFFFFF;
 }
 
 .O {
   background: url(../icons/o.svg) center no-repeat;
   background-size: contain;
+  background-color: #FFFFFF;
+}
+
+.hide {
+  display: none;
+}
+
+.players {
+  color: #FB8225;
+}
+
+.label {
+  font-weight: bold;
+  color: #404040;
+}
+
+.footer {
+  padding-top: 30px;
+  color: #444;
+}
+
+.game-outcome {
+  color: #fb8225;
 }

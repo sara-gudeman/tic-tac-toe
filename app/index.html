@@ -9,24 +9,26 @@
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css" />
 
   </head>
-  <body ng-app="game">
+  <body class="container" ng-app="game">
 
-    <header>
+    <header class="header">
       <h1>Play Tic-Tac-Toe</h1>
     </header>
 
     <article class="game" ng-controller="GameController">
-      <div class="gameboard">
-        Current Player: {{currentPlayer.name}}
-        Player Piece: {{currentPlayer.gamePiece}}
+      <div class="gameboard shadow">
         <div class="row" ng-repeat="row in board" ng-init="parentIndex = $index">
           <button class="col board-square" ng-class="board[parentIndex][$index].value" ng-repeat="col in row track by $index" ng-disabled="board[parentIndex][$index].disabled" ng-click="updateGame(parentIndex, $index, playerId)"></button>
         </div>
       </div>
+      <div class="players">
+        <p class="player" ng-class="{'hide': !isHidden}"><span class="label">Current Player:</span> {{currentPlayer.name}}</p>
+        <p class="piece" ng-class="{'hide': !isHidden}"><span class="label">Player Piece:</span> {{currentPlayer.gamePiece}}</p>
+        <p class="game-outcome label" ng-class="{'hide': isHidden}">{{outcome}}</p>
+      </div>    
     </article>
-    <game-piece></game-piece>
     
-    <footer>
+    <footer class="footer">
       <p>Made with &#9829; in San Francisco</p>
     </footer>
     
@@ -36,5 +38,6 @@
     <script src="services/board.service.js"></script>
     <script src="services/game-logic.service.js"></script>
     <script src="services/game-piece.service.js"></script>
+    <script src="services/game-player.service.js"></script>
   </body>
 </html>
