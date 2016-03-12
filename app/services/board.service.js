@@ -2,17 +2,10 @@ angular
     .module('game')
     .factory('boardService', boardService);
 
-function boardService () {
-  var service = {};
+boardService.$inject = ['gamePiece'];
 
-  // TODO: PIECE FUNCTIONALITY INTO OWN SERVICE/TEMPLATE
-  // STORE ISDISABLED LOGIC ON PIECE, NOT BOARD
-  function makePiece () {
-    return {
-      value: null,
-      disabled: false
-    }
-  }
+function boardService (gamePiece) {
+  var service = {};
 
   service.makeBoard = function (n) {
     var board = [];
@@ -20,7 +13,7 @@ function boardService () {
     for (var i = 0; i < n; i++) {
       var row = [];
       for (var j = 0; j < n; j++) {
-        var piece = makePiece();
+        var piece = gamePiece.makePiece();
         row.push({piece});
       }
       board.push(row);
