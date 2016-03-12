@@ -56,15 +56,27 @@ function GameController ($scope, boardService, gameLogic) {
   function updateGame (row, col, playerId) {
     $scope.togglePiece(row, col);
     var board = boardService.getBoardState($scope.board);
-    $scope.checkWin(board, row, col, $scope.currentPiece);
+    gameLogic.checkWin(board, row, col, $scope.currentPiece);
+
+    // TEMP: JUST LOGGING THE WINNER
+    if (gameLogic.checkWin(board, row, col, $scope.currentPiece)) {
+      console.log($scope.players[playerId].name, ' wins')
+      $scope.outcome = $scope.players[playerId].name;
+      boardService.disableBoard($scope.board);
+    }
+    // TEMP: JUST LOGGING THE TIE
+    if (gameLogic.checkWin(board, row, col, $scope.currentPiece) && gameLogic.checkTie(board)) {
+      console.log('tie')
+    }
+    
     $scope.playerId = $scope.changePlayers(playerId);
     $scope.currentPlayer = $scope.players[$scope.playerId];
     $scope.currentPiece = $scope.currentPlayer.gamePiece;
   }
 
   function restartGame () {
-    // reset board to initial state
-    // basically just make a new board?
+    $scope.board = boardService.makeBoard(size);
+    $scope.outcome = null;
   }
 
   function endGame () {

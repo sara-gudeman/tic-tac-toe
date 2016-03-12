@@ -40,5 +40,13 @@ function boardService () {
     return boardValues;
   }
 
+  service.disableBoard = function (board) {
+    board.forEach(function (row) {
+      row.forEach(function (piece) {
+        piece.disabled = true;
+      });
+    });
+  }
+
   return service;
 }

@@ -22,6 +22,19 @@ function gameLogic () {
     return rowWin || colWin || diagRWin || diagLWin;
   }
 
+  service.checkTie = function (board) {
+    var rowCountX = 0;
+    var rowCountO = 0;
+    for (var row = 0; row < board.length; row++) {
+      rowCountX+= rowCount(board, row, 'X');
+      rowCountO+= rowCount(board, row, 'O');
+    }
+
+    console.log('row count x is ', rowCountX, 'row count y is ', rowCountO);
+
+    return rowCountX + rowCountO === board.length * board.length;
+  }
+
   //////////////////////
   // HELPER FUNCTIONS //
   //////////////////////
