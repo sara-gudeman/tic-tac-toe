@@ -10,7 +10,6 @@ function GameController ($scope, boardService, gameLogic, gamePiece, gamePlayer)
   $scope.board = boardService.makeBoard(size);
   $scope.outcome = null;
 
-  // PLAYER FUNCTIONALITY
   $scope.players = [{
     name: 'Player 1',
     gamePiece: 'O'
@@ -20,18 +19,15 @@ function GameController ($scope, boardService, gameLogic, gamePiece, gamePlayer)
     gamePiece: 'X'
   }];
 
-  // later this can be developed such that multiple independent games can be played at once
-  // this function currently only allows for two players
   var changePlayers = gamePlayer.changePlayers.bind(null, $scope.players);
   var getPlayer = gamePlayer.getPlayer.bind(null, $scope.players);
 
   $scope.playerId = 0;
   $scope.currentPlayer = getPlayer($scope.playerId);
   $scope.updateGame = updateGame;
+  $scope.restartGame = restartGame;
   $scope.isHidden = true;
 
-  // GAME LOGIC FUNCTIONALITY
-  // TODO: REMOVE $SCOPE REFERENCES SO THAT THIS CAN BE PULLED OUT INTO SERVICE
   function updateGame (row, col, playerId) {
     var currentPlayer = getPlayer(playerId);
     var currentPiece = currentPlayer.gamePiece;

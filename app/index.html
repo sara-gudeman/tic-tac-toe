@@ -25,7 +25,8 @@
         <p class="player" ng-class="{'hide': !isHidden}"><span class="label">Current Player:</span> {{currentPlayer.name}}</p>
         <p class="piece" ng-class="{'hide': !isHidden}"><span class="label">Player Piece:</span> {{currentPlayer.gamePiece}}</p>
         <p class="game-outcome label" ng-class="{'hide': isHidden}">{{outcome}}</p>
-      </div>    
+        <button class="restart-btn" ng-class="{'hide': isHidden}" ng-click="restartGame()">Restart</button>
+      </div>
     </article>
     
     <footer class="footer">
