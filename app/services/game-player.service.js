@@ -13,7 +13,6 @@ function gamePlayer () {
   };
 
   service.getPlayer = function (players, playerId) {
-    console.log(players[playerId])
     return players[playerId];
   };
 
