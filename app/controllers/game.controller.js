@@ -12,14 +12,13 @@ function GameController ($scope, boardService, gameLogic, gamePiece, gamePlayer)
 
   // PLAYER FUNCTIONALITY
   $scope.players = [{
-      name: 'Player 1',
-      gamePiece: 'O'
-    },
-    {
-      name: 'Player 2',
-      gamePiece: 'X'
-    }
-  ];
+    name: 'Player 1',
+    gamePiece: 'O'
+  },
+  {
+    name: 'Player 2',
+    gamePiece: 'X'
+  }];
 
   // later this can be developed such that multiple independent games can be played at once
   // this function currently only allows for two players

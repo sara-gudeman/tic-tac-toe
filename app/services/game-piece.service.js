@@ -11,8 +11,8 @@ function gamePiece () {
     return {
       value: null,
       disabled: false
-    }
-  }
+    };
+  };
 
   service.togglePiece = function (piece, playerPiece) {
     if (!piece.disabled) {

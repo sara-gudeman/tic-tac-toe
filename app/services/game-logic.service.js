@@ -14,7 +14,7 @@ function gameLogic () {
     var diagRWin = isWin(diagRCount(board, piece), n);
 
     return rowWin || colWin || diagRWin || diagLWin;
-  }
+  };
 
   service.checkTie = function (board) {
     var rowCountX = 0;
@@ -24,10 +24,8 @@ function gameLogic () {
       rowCountO+= rowCount(board, row, 'O');
     }
 
-    console.log('row count x is ', rowCountX, 'row count y is ', rowCountO);
-
     return rowCountX + rowCountO === board.length * board.length;
-  }
+  };
 
   //////////////////////
   // HELPER FUNCTIONS //

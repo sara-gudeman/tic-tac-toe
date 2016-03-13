@@ -14,12 +14,12 @@ function boardService (gamePiece) {
       var row = [];
       for (var j = 0; j < n; j++) {
         var piece = gamePiece.makePiece();
-        row.push({piece});
+        row.push(piece);
       }
       board.push(row);
     }
     return board;
-  }
+  };
 
   service.getBoardState = function (board) {
     var boardValues = [];
@@ -31,7 +31,7 @@ function boardService (gamePiece) {
       boardValues.push(rowValues);
     }
     return boardValues;
-  }
+  };
 
   service.disableBoard = function (board) {
     board.forEach(function (row) {
@@ -39,7 +39,7 @@ function boardService (gamePiece) {
         piece.disabled = true;
       });
     });
-  }
+  };
 
   return service;
 }
