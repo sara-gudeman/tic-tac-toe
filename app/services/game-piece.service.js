@@ -5,8 +5,6 @@ angular
 function gamePiece () {
   var service = {};
 
-  // TODO: PIECE FUNCTIONALITY INTO OWN SERVICE/TEMPLATE
-  // STORE ISDISABLED LOGIC ON PIECE, NOT BOARD
   service.makePiece = function () {
     return {
       value: null,
